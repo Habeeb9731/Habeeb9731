@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Abdul Habeeb</h1>
-<h3 align="center">A passionate frontend developer from Saarland, Germany</h3>
+<h3 align="center">A passionate frontend developer and UI/UX Engineer from Saarland, Germany</h3>
 
 - 👨‍💻 All of my projects are available at [http://abdulhabeeb.website/](http://abdulhabeeb.website/)
 

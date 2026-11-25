@@ -17,18 +17,18 @@
 </style>
 <g clip-path="url(#lc)"><rect width="413" height="300" fill="#1b1b1b"/><rect width="413" height="300" fill="url(#lh)"/>
   <text class="t mut" x="28" y="40" font-size="12">Top language</text>
-  <text class="t num" x="28" y="76" font-size="34">CSS</text>
+  <text class="t num" x="28" y="76" font-size="34">HTML</text>
   <circle cx="361" cy="52" r="24" fill="#c6f432"/>
   <path d="M355 58L367 46M356.92 46H367V56.08" stroke="#141414" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
   <rect class="rt" style="animation-delay:0s" x="28" y="104" width="301" height="28" rx="6" fill="#c6f432" fill-opacity="1"/>
-    <text class="t ink" x="40" y="122.5" font-size="11.5" font-weight="700">CSS</text>
-    <text class="t mut" x="339" y="122.5" font-size="11.5">40.3%</text><rect class="rt" style="animation-delay:0.07s" x="28" y="142" width="197.94554431222457" height="28" rx="6" fill="#c6f432" fill-opacity="0.87"/>
-    <text class="t ink" x="40" y="160.5" font-size="11.5" font-weight="700">JavaScript</text>
-    <text class="t mut" x="235.94554431222457" y="160.5" font-size="11.5">26.5%</text><rect class="rt" style="animation-delay:0.14s" x="28" y="180" width="164.52468591251426" height="28" rx="6" fill="#c6f432" fill-opacity="0.74"/>
-    <text class="t ink" x="40" y="198.5" font-size="11.5" font-weight="700">HTML</text>
-    <text class="t mut" x="202.52468591251426" y="198.5" font-size="11.5">22.0%</text><rect class="rt" style="animation-delay:0.21000000000000002s" x="28" y="218" width="52.68" height="28" rx="6" fill="#c6f432" fill-opacity="0.61"/>
-    <text class="t ink" x="40" y="236.5" font-size="11.5" font-weight="700">SCSS</text>
-    <text class="t mut" x="90.68" y="236.5" font-size="11.5">5.2%</text><rect class="rt" style="animation-delay:0.28s" x="28" y="256" width="52.68" height="28" rx="6" fill="#c6f432" fill-opacity="0.48"/>
-    <text class="t ink" x="40" y="274.5" font-size="11.5" font-weight="700">Less</text>
-    <text class="t mut" x="90.68" y="274.5" font-size="11.5">2.1%</text></g>
+    <text class="t ink" x="40" y="122.5" font-size="11.5" font-weight="700">HTML</text>
+    <text class="t mut" x="339" y="122.5" font-size="11.5">38.5%</text><rect class="rt" style="animation-delay:0.07s" x="28" y="142" width="140.46666666666664" height="28" rx="6" fill="#c6f432" fill-opacity="0.87"/>
+    <text class="t ink" x="40" y="160.5" font-size="11.5" font-weight="700">TypeScript</text>
+    <text class="t mut" x="178.46666666666664" y="160.5" font-size="11.5">17.9%</text><rect class="rt" style="animation-delay:0.14s" x="28" y="180" width="140.46666666666664" height="28" rx="6" fill="#c6f432" fill-opacity="0.74"/>
+    <text class="t ink" x="40" y="198.5" font-size="11.5" font-weight="700">CSS</text>
+    <text class="t mut" x="178.46666666666664" y="198.5" font-size="11.5">17.9%</text><rect class="rt" style="animation-delay:0.21000000000000002s" x="28" y="218" width="92.69999999999999" height="28" rx="6" fill="#c6f432" fill-opacity="0.61"/>
+    <text class="t ink" x="40" y="236.5" font-size="11.5" font-weight="700">JavaScript</text>
+    <text class="t mut" x="130.7" y="236.5" font-size="11.5">10.3%</text><rect class="rt" style="animation-delay:0.28s" x="28" y="256" width="66.02" height="28" rx="6" fill="#c6f432" fill-opacity="0.48"/>
+    <text class="t ink" x="40" y="274.5" font-size="11.5" font-weight="700">Python</text>
+    <text class="t mut" x="104.02" y="274.5" font-size="11.5">7.7%</text></g>
 </svg>

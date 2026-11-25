@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="413" height="180" viewBox="0 0 413 180" fill="none" role="img">
 <defs>
-  <pattern id="r0h" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="9" stroke="#fff" stroke-opacity=".028" stroke-width="1"/></pattern>
-  <clipPath id="r0c"><rect width="413" height="180" rx="28"/></clipPath>
+  <pattern id="r2h" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="9" stroke="#fff" stroke-opacity=".028" stroke-width="1"/></pattern>
+  <clipPath id="r2c"><rect width="413" height="180" rx="28"/></clipPath>
 </defs>
 <style>
   .t{font-family:Urbanist,'Plus Jakarta Sans',Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:#f2f2f2}
@@ -15,8 +15,8 @@
   @keyframes rt{from{transform:scaleX(0)}to{transform:scaleX(1)}}
   @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
-<g clip-path="url(#r0c)"><rect width="413" height="180" fill="#1b1b1b"/><rect width="413" height="180" fill="url(#r0h)"/>
-  <text class="t mut" x="28" y="42" font-size="12">#01</text>
+<g clip-path="url(#r2c)"><rect width="413" height="180" fill="#1b1b1b"/><rect width="413" height="180" fill="url(#r2h)"/>
+  <text class="t mut" x="28" y="42" font-size="12">#03</text>
   <text class="t" x="28" y="74" font-size="21" font-weight="500" letter-spacing="-.3">apex-f1-analytics</text>
   <text class="t mut" x="28" y="102" font-size="12">APEX — historical F1 race and telemetry</text><text class="t mut" x="28" y="119" font-size="12">analytics (OpenF1)</text>
   <g transform="translate(28 136)"><rect width="93.8" height="24" rx="12" fill="#3a3a3a"/>

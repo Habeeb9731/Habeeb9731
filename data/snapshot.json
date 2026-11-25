@@ -1,0 +1,117 @@
+{
+ "name": "Abdul habeeb",
+ "login": "Habeeb9731",
+ "createdAt": "2020-09-16T13:37:59Z",
+ "avatar": null,
+ "followers": 1,
+ "publicRepos": 48,
+ "stars": 0,
+ "languages": [
+  {
+   "name": "TypeScript",
+   "weight": 5,
+   "color": "#3178c6"
+  },
+  {
+   "name": "HTML",
+   "weight": 4,
+   "color": "#e34c26"
+  },
+  {
+   "name": "Python",
+   "weight": 3,
+   "color": "#3572A5"
+  },
+  {
+   "name": "CSS",
+   "weight": 2,
+   "color": "#663399"
+  },
+  {
+   "name": "Kotlin",
+   "weight": 1,
+   "color": "#A97BFF"
+  },
+  {
+   "name": "Astro",
+   "weight": 1,
+   "color": "#ff5a03"
+  }
+ ],
+ "repos": [
+  {
+   "name": "german-day-ahead-forecast",
+   "description": "Forecasts German day-ahead electricity prices each morning and publishes an honest track record",
+   "language": "TypeScript",
+   "color": "#3178c6",
+   "stars": 0,
+   "fork": false
+  },
+  {
+   "name": "linkstoqr",
+   "description": "Free, open source QR code generator. Runs in your browser, with no sign-up or tracking.",
+   "language": "TypeScript",
+   "color": "#3178c6",
+   "stars": 0,
+   "fork": false
+  },
+  {
+   "name": "apex-f1-analytics",
+   "description": "APEX \u2014 historical F1 race and telemetry analytics (OpenF1)",
+   "language": "TypeScript",
+   "color": "#3178c6",
+   "stars": 0,
+   "fork": false
+  },
+  {
+   "name": "dbtt-widget",
+   "description": "Live Saarbahn departure widgets for Rainmeter and Wear OS",
+   "language": "Kotlin",
+   "color": "#A97BFF",
+   "stars": 0,
+   "fork": false
+  },
+  {
+   "name": "autonomous-data-analyst",
+   "description": null,
+   "language": "Python",
+   "color": "#3572A5",
+   "stars": 0,
+   "fork": false
+  }
+ ],
+ "calendar": {
+  "from": "2025-11-23",
+  "to": "2026-11-25",
+  "nonZero": {
+   "2026-04-30": 1,
+   "2026-05-18": 1,
+   "2026-05-30": 1,
+   "2026-06-17": 10,
+   "2026-06-18": 50,
+   "2026-07-05": 2,
+   "2026-07-11": 1,
+   "2026-07-12": 1,
+   "2026-07-13": 2,
+   "2026-07-26": 1,
+   "2026-07-27": 1,
+   "2026-07-30": 1,
+   "2026-08-04": 5,
+   "2026-08-07": 1,
+   "2026-08-12": 2,
+   "2026-09-17": 1,
+   "2026-09-23": 1,
+   "2026-09-29": 1,
+   "2026-09-30": 1,
+   "2026-10-30": 1,
+   "2026-11-02": 1,
+   "2026-11-03": 1,
+   "2026-11-04": 5,
+   "2026-11-05": 1,
+   "2026-11-06": 2,
+   "2026-11-08": 1,
+   "2026-11-16": 4
+  }
+ },
+ "ownRepoCount": 17
+}

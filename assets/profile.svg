@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="318" viewBox="0 0 840 318" fill="none" role="img">
+<defs>
+  <pattern id="ph" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="9" stroke="#fff" stroke-opacity=".028" stroke-width="1"/></pattern>
+  <clipPath id="pc"><rect width="840" height="318" rx="28"/></clipPath>
+</defs>
+<style>
+  .t{font-family:Urbanist,'Plus Jakarta Sans',Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:#f2f2f2}
+  .mut{fill:#8a8a8a}.ink{fill:#141414}
+  .num{font-weight:300;letter-spacing:-1px}
+  .in{animation:in .6s cubic-bezier(.2,.7,.2,1) both}
+  .up{transform-box:fill-box;transform-origin:bottom;animation:up .8s cubic-bezier(.2,.7,.2,1) both}
+  .rt{transform-box:fill-box;transform-origin:left;animation:rt .8s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes in{from{opacity:0}to{opacity:1}}
+  @keyframes up{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+  @keyframes rt{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<g clip-path="url(#pc)"><rect width="840" height="318" fill="#1b1b1b"/><rect width="840" height="318" fill="url(#ph)"/>
+  <rect x="28" y="28" width="136" height="136" rx="22" fill="#262626"/>
+  <circle cx="96" cy="96" r="50" fill="#c6f432"/><text class="t ink" x="96" y="107" font-size="30" font-weight="700" text-anchor="middle">AH</text>
+  <text class="t" x="180" y="64" font-size="30" font-weight="500" letter-spacing="-.4">Abdul Habeeb</text>
+  <text class="t mut" x="180" y="90" font-size="13">@Habeeb9731  ·  Saarbrücken, DE  ·  abdulhabeeb.com</text>
+  <text class="t" x="180" y="122" font-size="13.5" fill="#d6d6d6">Data Science &amp; AI M.Sc. @ Saarland University · Full-stack developer · RA at FGVT</text>
+  <g transform="translate(180 150)"><rect width="131.23" height="28" rx="14" fill="#3a3a3a"/>
+      <text class="t" x="13" y="18.5" font-size="11.5" font-weight="500">TypeScript</text>
+      <rect x="92.69999999999999" y="6" width="32.53" height="16" rx="8" fill="#c6f432"/>
+      <text class="t ink" x="108.96499999999999" y="17.5" font-size="9.5" font-weight="700" text-anchor="middle">31%</text></g><g transform="translate(319.23 150)"><rect width="91.21000000000001" height="28" rx="14" fill="#3a3a3a"/>
+      <text class="t" x="13" y="18.5" font-size="11.5" font-weight="500">HTML</text>
+      <rect x="52.68000000000001" y="6" width="32.53" height="16" rx="8" fill="#c6f432"/>
+      <text class="t ink" x="68.94500000000001" y="17.5" font-size="9.5" font-weight="700" text-anchor="middle">25%</text></g><g transform="translate(418.44000000000005 150)"><rect width="104.55" height="28" rx="14" fill="#3a3a3a"/>
+      <text class="t" x="13" y="18.5" font-size="11.5" font-weight="500">Python</text>
+      <rect x="66.02" y="6" width="32.53" height="16" rx="8" fill="#c6f432"/>
+      <text class="t ink" x="82.285" y="17.5" font-size="9.5" font-weight="700" text-anchor="middle">19%</text></g><g transform="translate(530.99 150)"><rect width="84.53999999999999" height="28" rx="14" fill="#3a3a3a"/>
+      <text class="t" x="13" y="18.5" font-size="11.5" font-weight="500">CSS</text>
+      <rect x="46.00999999999999" y="6" width="32.53" height="16" rx="8" fill="#c6f432"/>
+      <text class="t ink" x="62.27499999999999" y="17.5" font-size="9.5" font-weight="700" text-anchor="middle">13%</text></g>
+  <g transform="translate(617.44 37)"><rect width="126.55999999999999" height="30" rx="15" fill="#f4f4f4"/>
+  <circle cx="15" cy="15" r="10" fill="#141414"/><path d="M10.8 15.2l2.8 2.6 5-5.4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text class="t ink" x="33" y="19.2" font-size="11" font-weight="600">OPEN TO WORK</text></g>
+  <circle cx="784" cy="52" r="24" fill="#c6f432"/>
+  <path d="M778 58L790 46M779.92 46H790V56.08" stroke="#141414" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="28" y1="210" x2="812" y2="210" stroke="#fff" stroke-opacity=".08"/>
+  <g class="in" style="animation-delay:0.1s">
+    <text class="t mut" x="28" y="244" font-size="12">Contributions</text>
+    <text class="t num" x="28" y="286" font-size="34">100</text></g><g class="in" style="animation-delay:0.17s">
+    <text class="t mut" x="224" y="244" font-size="12">Public repos</text>
+    <text class="t num" x="224" y="286" font-size="34">48</text></g><g class="in" style="animation-delay:0.24000000000000002s">
+    <text class="t mut" x="420" y="244" font-size="12">Active days</text>
+    <text class="t num" x="420" y="286" font-size="34">27</text></g><g class="in" style="animation-delay:0.31000000000000005s">
+    <text class="t mut" x="616" y="244" font-size="12">Best streak</text>
+    <text class="t num" x="616" y="286" font-size="34">5d</text></g></g>
+</svg>

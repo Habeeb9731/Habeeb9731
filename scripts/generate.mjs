@@ -300,3 +300,11 @@ const files = { "profile.svg": profileCard(), "activity.svg": activityCard(), "l
 cfg.featured.forEach((n, i) => (files[`repo-${n}.svg`] = repoCard(n, i)));
 for (const [n, svg] of Object.entries(files)) await writeFile(join(OUT, n), svg);
 console.log(`wrote ${Object.keys(files).length} cards · ${total} contributions · ${activeDays} active days · streak ${current}/${longest}${D.avatar ? " · avatar embedded" : " · no avatar (initials)"}`);
+
+// bust GitHub's image cache: stamp every card link in README.md with this run's version
+try {
+  const rp = join(ROOT, "README.md");
+  const v = Date.now().toString(36);
+  const md = await readFile(rp, "utf8");
+  await writeFile(rp, md.replace(/(assets\/[\w.-]+\.svg)(\?v=\w+)?"/g, `$1?v=${v}"`));
+} catch {}

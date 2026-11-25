@@ -41,7 +41,7 @@
   <line x1="28" y1="210" x2="812" y2="210" stroke="#fff" stroke-opacity=".08"/>
   <g class="in" style="animation-delay:0.1s">
     <text class="t mut" x="28" y="244" font-size="12">Contributions</text>
-    <text class="t num" x="28" y="286" font-size="34">107</text></g><g class="in" style="animation-delay:0.17s">
+    <text class="t num" x="28" y="286" font-size="34">108</text></g><g class="in" style="animation-delay:0.17s">
     <text class="t mut" x="224" y="244" font-size="12">Public repos</text>
     <text class="t num" x="224" y="286" font-size="34">47</text></g><g class="in" style="animation-delay:0.24000000000000002s">
     <text class="t mut" x="420" y="244" font-size="12">Active days</text>

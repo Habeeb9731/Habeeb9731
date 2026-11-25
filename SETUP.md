@@ -9,6 +9,7 @@
 - `tagline`, `location`, `website`
 - `featured`: repo names shown as cards — if you change these, update the matching `<a>/<img>` lines in README.md
 - `languageMode`: `repos` (count each repo's main language) or `bytes` (GitHub's code-size totals)
+- `recentRepos`: with `languageMode: repos`, only count this many most-recently-updated repos (remove to count all)
 - `descriptionOverrides`: `{ "repo-name": "custom text" }` for repos without a description
 
 Local preview without a token: `node scripts/generate.mjs --data data/snapshot.json`

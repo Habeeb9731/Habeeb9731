@@ -52,7 +52,7 @@ async function fetchLive() {
       langs[e.node.name].size += e.size;
     }
   } else {
-    for (const r of own) if (r.primaryLanguage) {
+    for (const r of own.slice(0, cfg.recentRepos || own.length)) if (r.primaryLanguage) {
       langs[r.primaryLanguage.name] ??= { size: 0, color: r.primaryLanguage.color };
       langs[r.primaryLanguage.name].size += 1;
     }
@@ -248,7 +248,7 @@ function languagesCard() {
     <text class="t mut" x="${28 + w + 10}" y="${y + 18.5}" font-size="11.5">${l.pct.toFixed(1)}%</text>`;
   }).join("");
   const body = `
-  <text class="t mut" x="28" y="40" font-size="12">Top language</text>
+  <text class="t mut" x="28" y="40" font-size="12">Top language${cfg.recentRepos && cfg.languageMode !== "bytes" ? ` · last ${cfg.recentRepos} repos` : ""}</text>
   <text class="t num" x="28" y="76" font-size="34">${esc(top[0]?.name ?? "—")}</text>
   ${arrowBtn(W - 52, 52)}
   ${bars}`;

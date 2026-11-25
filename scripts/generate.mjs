@@ -164,6 +164,37 @@ const tooltip = (cx, y, label, light = true) => {
 };
 const stamp = (w, h) => `<text class="t mut" x="${w - 28}" y="${h - 16}" font-size="9" text-anchor="end" opacity=".55">updated ${new Date().toISOString().slice(0, 10)}</text>`;
 
+
+// flowing fiber-optic strands with light pulses (seeded so output is stable between runs)
+function fibers(W, H, id) {
+  let seed = 7; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  let paths = "", pulses = "";
+  for (let i = 0; i < 34; i++) {
+    const depth = rnd();                       // 0 = far (thin, dim, blurred), 1 = near
+    const x0 = -40 + rnd() * W * 0.55, y0 = H * (0.75 + rnd() * 0.6);
+    const x3 = W + 40, y3 = -H * 0.6 + rnd() * H;
+    const c1x = x0 + W * (0.25 + rnd() * 0.2), c1y = y0 - H * (0.05 + rnd() * 0.25);
+    const c2x = W * (0.55 + rnd() * 0.25), c2y = y3 + H * (0.25 + rnd() * 0.35);
+    const d = `M${x0.toFixed(0)} ${y0.toFixed(0)}C${c1x.toFixed(0)} ${c1y.toFixed(0)} ${c2x.toFixed(0)} ${c2y.toFixed(0)} ${x3} ${y3.toFixed(0)}`;
+    const sw = (0.5 + depth * 1.5).toFixed(2), op = (0.06 + depth * 0.2).toFixed(2);
+    const blur = depth < 0.35 ? ` filter="url(#${id}blur)"` : "";
+    paths += `<path d="${d}" stroke="${A}" stroke-width="${sw}" stroke-opacity="${op}" stroke-linecap="round"${blur}/>`;
+    if (i % 2 === 0) {
+      const dur = (3.5 + rnd() * 4).toFixed(2), delay = (-rnd() * 8).toFixed(2), len = (30 + depth * 60).toFixed(0);
+      pulses += `<path class="pulse" d="${d}" pathLength="1000" stroke="url(#${id}pulse)" stroke-width="${(1 + depth * 1.8).toFixed(2)}" stroke-linecap="round" stroke-dasharray="${len} 1000" style="animation-duration:${dur}s;animation-delay:${delay}s"${blur}/>`;
+    }
+  }
+  return `<defs>
+    <filter id="${id}blur" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="1.6"/></filter>
+    <filter id="${id}glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <linearGradient id="${id}pulse" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#ffffff"/><stop offset=".5" stop-color="${A}"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <linearGradient id="${id}fade" x1="0" y1="0" x2="${W}" y2="0" gradientUnits="userSpaceOnUse"><stop offset=".15" stop-color="#fff" stop-opacity="0"/><stop offset=".55" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff"/></linearGradient>
+    <mask id="${id}mask"><rect width="${W}" height="${H}" fill="url(#${id}fade)"/></mask>
+  </defs>
+  <style>.pulse{stroke-dashoffset:1000;animation:flow linear infinite}@keyframes flow{from{stroke-dashoffset:1000}to{stroke-dashoffset:-60}}</style>
+  <g mask="url(#${id}mask)"><g class="in">${paths}</g><g filter="url(#${id}glow)">${pulses}</g></g>`;
+}
+
 // ---------- cards ----------
 function profileCard() {
   const W = 840, H = 318;
@@ -189,6 +220,7 @@ function profileCard() {
     <text class="t mut" x="${28 + i * colW}" y="244" font-size="12">${l}</text>
     <text class="t num" x="${28 + i * colW}" y="286" font-size="34">${esc(v)}</text></g>`).join("");
   const body = `
+  ${fibers(W, H, "pf")}
   ${avatar}
   <text class="t" x="180" y="64" font-size="30" font-weight="500" letter-spacing="-.4">${esc(cfg.displayName || D.name)}</text>
   <text class="t mut" x="180" y="90" font-size="13">@${esc(D.login)}  ·  ${esc([cfg.location, cfg.website].filter(Boolean).join("  ·  "))}</text>

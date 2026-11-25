@@ -169,17 +169,21 @@ const stamp = (w, h) => `<text class="t mut" x="${w - 28}" y="${h - 16}" font-si
 function fibers(W, H, id) {
   let seed = 7; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
   let paths = "", pulses = "";
-  for (let i = 0; i < 34; i++) {
+  const N = 48;
+  for (let i = 0; i < N; i++) {
     const depth = rnd();                       // 0 = far (thin, dim, blurred), 1 = near
-    const x0 = -40 + rnd() * W * 0.55, y0 = H * (0.75 + rnd() * 0.6);
-    const x3 = W + 40, y3 = -H * 0.6 + rnd() * H;
-    const c1x = x0 + W * (0.25 + rnd() * 0.2), c1y = y0 - H * (0.05 + rnd() * 0.25);
-    const c2x = W * (0.55 + rnd() * 0.25), c2y = y3 + H * (0.25 + rnd() * 0.35);
-    const d = `M${x0.toFixed(0)} ${y0.toFixed(0)}C${c1x.toFixed(0)} ${c1y.toFixed(0)} ${c2x.toFixed(0)} ${c2y.toFixed(0)} ${x3} ${y3.toFixed(0)}`;
+    // spread start points evenly along the bottom-left edge, end points along the top-right edge
+    const t = (i + rnd() * 0.8) / N;
+    const x0 = -W * 0.35 + t * W * 1.1, y0 = H + 20 + rnd() * 30;
+    const x3 = x0 + W * (0.55 + rnd() * 0.35), y3 = -20 - rnd() * 30;
+    const bend = (rnd() - 0.5) * H * 0.9;
+    const c1x = x0 + (x3 - x0) * 0.35, c1y = y0 - H * 0.35 + bend;
+    const c2x = x0 + (x3 - x0) * 0.65, c2y = y3 + H * 0.35 + bend;
+    const d = `M${x0.toFixed(0)} ${y0.toFixed(0)}C${c1x.toFixed(0)} ${c1y.toFixed(0)} ${c2x.toFixed(0)} ${c2y.toFixed(0)} ${x3.toFixed(0)} ${y3.toFixed(0)}`;
     const sw = (0.5 + depth * 1.5).toFixed(2), op = (0.06 + depth * 0.2).toFixed(2);
     const blur = depth < 0.35 ? ` filter="url(#${id}blur)"` : "";
     paths += `<path d="${d}" stroke="${A}" stroke-width="${sw}" stroke-opacity="${op}" stroke-linecap="round"${blur}/>`;
-    if (i % 2 === 0) {
+    if (i % 3 !== 1) {
       const dur = (3.5 + rnd() * 4).toFixed(2), delay = (-rnd() * 8).toFixed(2), len = (30 + depth * 60).toFixed(0);
       pulses += `<path class="pulse" d="${d}" pathLength="1000" stroke="url(#${id}pulse)" stroke-width="${(1 + depth * 1.8).toFixed(2)}" stroke-linecap="round" stroke-dasharray="${len} 1000" style="animation-duration:${dur}s;animation-delay:${delay}s"${blur}/>`;
     }
@@ -192,7 +196,7 @@ function fibers(W, H, id) {
     <mask id="${id}mask"><rect width="${W}" height="${H}" fill="url(#${id}fade)"/></mask>
   </defs>
   <style>.pulse{stroke-dashoffset:1000;animation:flow linear infinite}@keyframes flow{from{stroke-dashoffset:1000}to{stroke-dashoffset:-60}}</style>
-  <g mask="url(#${id}mask)"><g class="in">${paths}</g><g filter="url(#${id}glow)">${pulses}</g></g>`;
+  <g class="in">${paths}</g><g filter="url(#${id}glow)">${pulses}</g>`;
 }
 
 // ---------- cards ----------
@@ -221,7 +225,7 @@ function profileCard() {
     <text class="t num" x="${28 + i * colW}" y="286" font-size="34">${esc(v)}</text></g>`).join("");
   const body = `
   ${fibers(W, H, "pf")}
-  <defs><linearGradient id="pscrim" x1="0" y1="0" x2="${W}" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="${CARD}" stop-opacity=".85"/><stop offset=".6" stop-color="${CARD}" stop-opacity=".62"/><stop offset="1" stop-color="${CARD}" stop-opacity=".45"/></linearGradient></defs>
+  <defs><linearGradient id="pscrim" x1="0" y1="0" x2="${W}" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="${CARD}" stop-opacity=".66"/><stop offset=".6" stop-color="${CARD}" stop-opacity=".58"/><stop offset="1" stop-color="${CARD}" stop-opacity=".5"/></linearGradient></defs>
   <rect width="${W}" height="${H}" fill="url(#pscrim)"/>
   ${avatar}
   <text class="t" x="180" y="64" font-size="30" font-weight="500" letter-spacing="-.4">${esc(cfg.displayName || D.name)}</text>

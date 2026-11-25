@@ -12,7 +12,9 @@
     "apex-f1-analytics",
     "anime-recommender"
   ],
-  "descriptionOverrides": {},
+  "descriptionOverrides": {
+    "anime-recommender": "Hybrid recommender for new titles and new users · +313% NDCG@10 over popularity"
+  },
   "languageMode": "repos",
   "recentRepos": 18
 }

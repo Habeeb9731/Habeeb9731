@@ -16,5 +16,31 @@
     "anime-recommender": "Hybrid recommender for new titles and new users · +313% NDCG@10 over popularity"
   },
   "languageMode": "repos",
-  "recentRepos": 18
+  "recentRepos": 18,
+  "contacts": [
+    {
+      "icon": "github",
+      "label": "@Habeeb9731"
+    },
+    {
+      "icon": "pin",
+      "label": "Saarbrücken, DE"
+    },
+    {
+      "icon": "globe",
+      "label": "abdulhabeeb.com"
+    },
+    {
+      "icon": "linkedin",
+      "label": "in/abdulhabeeb9731"
+    },
+    {
+      "icon": "mail",
+      "label": "abdulhabeeb9731@gmail.com"
+    },
+    {
+      "icon": "mail",
+      "label": "hello@abdulhabeeb.com"
+    }
+  ]
 }

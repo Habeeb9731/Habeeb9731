@@ -199,9 +199,32 @@ function fibers(W, H, id) {
   <g class="in">${paths}</g><g filter="url(#${id}glow)">${pulses}</g>`;
 }
 
+
+const ICONS = {
+  github: '<path d="M6 1a5 5 0 0 0-1.6 9.75c.25.05.34-.11.34-.24v-.85c-1.39.3-1.68-.6-1.68-.6-.23-.58-.56-.73-.56-.73-.45-.31.04-.3.04-.3.5.03.77.52.77.52.45.77 1.18.55 1.46.42.05-.33.18-.55.32-.67-1.11-.13-2.28-.56-2.28-2.47 0-.55.2-1 .52-1.35-.05-.13-.23-.64.05-1.33 0 0 .42-.13 1.38.52a4.7 4.7 0 0 1 2.5 0c.96-.65 1.38-.52 1.38-.52.28.69.1 1.2.05 1.33.32.35.52.8.52 1.35 0 1.92-1.17 2.34-2.29 2.46.18.16.34.46.34.92v1.37c0 .13.09.3.35.24A5 5 0 0 0 6 1Z" fill="currentColor"/>',
+  pin: '<path d="M6 11s3.6-3.3 3.6-6.1A3.6 3.6 0 0 0 2.4 4.9C2.4 7.7 6 11 6 11Z" stroke="currentColor" stroke-width="1.1"/><circle cx="6" cy="4.9" r="1.3" stroke="currentColor" stroke-width="1.1"/>',
+  globe: '<circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.1"/><path d="M1.4 6h9.2M6 1.4c1.4 1.3 2 2.9 2 4.6s-.6 3.3-2 4.6M6 1.4C4.6 2.7 4 4.3 4 6s.6 3.3 2 4.6" stroke="currentColor" stroke-width="1.1"/>',
+  linkedin: '<rect x="1" y="1" width="10" height="10" rx="2" fill="currentColor"/><path d="M3.4 5.1v3.6M3.4 3.4v.1M5.4 8.7V5.1m0 1.6c0-.9.6-1.7 1.5-1.7s1.3.6 1.3 1.6v2.1" stroke="#262626" stroke-width="1.15" stroke-linecap="round"/>',
+  mail: '<rect x="1.2" y="2.4" width="9.6" height="7.2" rx="1.6" stroke="currentColor" stroke-width="1.1"/><path d="m1.8 3.4 4.2 3.1 4.2-3.1" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/>',
+};
+function contactPills(x0, y0, maxX, items) {
+  let x = x0, y = y0, out = "";
+  for (const it of items) {
+    const w = tw(it.label, 11.5) * 0.93 + 40 + (it.label.split("@").length - 1) * 4 + (it.icon === "github" ? 8 : 0);
+    if (x + w > maxX && x > x0) { x = x0; y += 34; }
+    out += `<g transform="translate(${x} ${y})"><rect width="${w}" height="26" rx="13" fill="#2a2a2a" fill-opacity=".92" stroke="#fff" stroke-opacity=".07"/>
+      <g transform="translate(11 7)" color="${it.icon === "github" ? A : "#cfcfcf"}" fill="none">${ICONS[it.icon] ?? ""}</g>
+      <text class="t" x="29" y="17.3" font-size="11.5" fill="${it.icon === "github" ? A : "#e6e6e6"}" font-weight="${it.icon === "github" ? 600 : 400}">${esc(it.label)}</text></g>`;
+    x += w + 8;
+  }
+  return { svg: out, bottom: y + 26 };
+}
+
 // ---------- cards ----------
 function profileCard() {
-  const W = 840, H = 318;
+  const W = 840;
+  const contacts = contactPills(180, 80, W - 28, cfg.contacts ?? []);
+  const cb = contacts.bottom, H = cb + 206;
   const initials = (cfg.displayName || D.name || D.login).split(/\s+/).map((p) => p[0]).slice(0, 2).join("").toUpperCase();
   const avatar = D.avatar
     ? `<clipPath id="pav"><rect x="28" y="28" width="136" height="136" rx="22"/></clipPath><image href="${D.avatar}" x="28" y="28" width="136" height="136" clip-path="url(#pav)" preserveAspectRatio="xMidYMid slice"/>`
@@ -212,7 +235,7 @@ function profileCard() {
   const pills = langs.slice(0, 4).map((l) => {
     const badge = String(Math.round((l.weight / langTotal) * 100)) + "%";
     const bw = tw(badge, 9.5) + 16, w = tw(l.name, 11.5) + bw + 32;
-    const g = `<g transform="translate(${cx} 150)"><rect width="${w}" height="28" rx="14" fill="#3a3a3a"/>
+    const g = `<g transform="translate(${cx} ${cb + 46})"><rect width="${w}" height="28" rx="14" fill="#3a3a3a"/>
       <text class="t" x="13" y="18.5" font-size="11.5" font-weight="500">${esc(l.name)}</text>
       <rect x="${w - bw - 6}" y="6" width="${bw}" height="16" rx="8" fill="${A}"/>
       <text class="t ink" x="${w - bw / 2 - 6}" y="17.5" font-size="9.5" font-weight="700" text-anchor="middle">${badge}</text></g>`;
@@ -221,20 +244,20 @@ function profileCard() {
   const stats = [["Contributions", fmt(total)], ["Public repos", fmt(D.publicRepos)], ["Active days", fmt(activeDays)], ["Best streak", `${longest}d`]];
   const colW = (W - 56) / 4;
   const statSvg = stats.map(([l, v], i) => `<g class="in" style="animation-delay:${0.1 + i * 0.07}s">
-    <text class="t mut" x="${28 + i * colW}" y="244" font-size="12">${l}</text>
-    <text class="t num" x="${28 + i * colW}" y="286" font-size="34">${esc(v)}</text></g>`).join("");
+    <text class="t mut" x="${28 + i * colW}" y="${H - 74}" font-size="12">${l}</text>
+    <text class="t num" x="${28 + i * colW}" y="${H - 32}" font-size="34">${esc(v)}</text></g>`).join("");
   const body = `
   ${fibers(W, H, "pf")}
   <defs><linearGradient id="pscrim" x1="0" y1="0" x2="${W}" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="${CARD}" stop-opacity=".66"/><stop offset=".6" stop-color="${CARD}" stop-opacity=".58"/><stop offset="1" stop-color="${CARD}" stop-opacity=".5"/></linearGradient></defs>
   <rect width="${W}" height="${H}" fill="url(#pscrim)"/>
   ${avatar}
   <text class="t" x="180" y="64" font-size="30" font-weight="500" letter-spacing="-.4">${esc(cfg.displayName || D.name)}</text>
-  <text class="t mut" x="180" y="90" font-size="13">@${esc(D.login)}  ·  ${esc([cfg.location, cfg.website].filter(Boolean).join("  ·  "))}</text>
-  <text class="t" x="180" y="122" font-size="13.5" fill="#d6d6d6">${esc(clip(cfg.tagline, 88))}</text>
+  ${contacts.svg}
+  <text class="t" x="180" y="${cb + 28}" font-size="13.5" fill="#d6d6d6">${esc(clip(cfg.tagline, 88))}</text>
   ${pills}
   ${cfg.badge ? checkPill(W - 96 - tw(cfg.badge, 11) - 50, 37, cfg.badge) : ""}
   ${arrowBtn(W - 56, 52)}
-  <line x1="28" y1="210" x2="${W - 28}" y2="210" stroke="#fff" stroke-opacity=".08"/>
+  <line x1="28" y1="${H - 108}" x2="${W - 28}" y2="${H - 108}" stroke="#fff" stroke-opacity=".08"/>
   ${statSvg}`;
   return frame(W, H, body, "p");
 }

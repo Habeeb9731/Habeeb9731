@@ -180,7 +180,7 @@ function fibers(W, H, id) {
     const c1x = x0 + (x3 - x0) * 0.35, c1y = y0 - H * 0.35 + bend;
     const c2x = x0 + (x3 - x0) * 0.65, c2y = y3 + H * 0.35 + bend;
     const d = `M${x0.toFixed(0)} ${y0.toFixed(0)}C${c1x.toFixed(0)} ${c1y.toFixed(0)} ${c2x.toFixed(0)} ${c2y.toFixed(0)} ${x3.toFixed(0)} ${y3.toFixed(0)}`;
-    const sw = (0.5 + depth * 1.5).toFixed(2), op = (0.06 + depth * 0.2).toFixed(2);
+    const sw = (0.5 + depth * 1.5).toFixed(2), op = (0.04 + depth * 0.11).toFixed(2);
     const blur = depth < 0.35 ? ` filter="url(#${id}blur)"` : "";
     paths += `<path d="${d}" stroke="${A}" stroke-width="${sw}" stroke-opacity="${op}" stroke-linecap="round"${blur}/>`;
     if (i % 3 !== 1) {
@@ -196,7 +196,7 @@ function fibers(W, H, id) {
     <mask id="${id}mask"><rect width="${W}" height="${H}" fill="url(#${id}fade)"/></mask>
   </defs>
   <style>.pulse{stroke-dashoffset:1000;animation:flow linear infinite}@keyframes flow{from{stroke-dashoffset:1000}to{stroke-dashoffset:-60}}</style>
-  <g class="in">${paths}</g><g filter="url(#${id}glow)">${pulses}</g>`;
+  <g class="in">${paths}</g><g filter="url(#${id}glow)" opacity=".5">${pulses}</g>`;
 }
 
 
@@ -248,7 +248,7 @@ function profileCard() {
     <text class="t num" x="${28 + i * colW}" y="${H - 32}" font-size="34">${esc(v)}</text></g>`).join("");
   const body = `
   ${fibers(W, H, "pf")}
-  <defs><linearGradient id="pscrim" x1="0" y1="0" x2="${W}" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="${CARD}" stop-opacity=".66"/><stop offset=".6" stop-color="${CARD}" stop-opacity=".58"/><stop offset="1" stop-color="${CARD}" stop-opacity=".5"/></linearGradient></defs>
+  <defs><linearGradient id="pscrim" x1="0" y1="0" x2="${W}" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="${CARD}" stop-opacity=".74"/><stop offset=".6" stop-color="${CARD}" stop-opacity=".68"/><stop offset="1" stop-color="${CARD}" stop-opacity=".62"/></linearGradient></defs>
   <rect width="${W}" height="${H}" fill="url(#pscrim)"/>
   ${avatar}
   <text class="t" x="180" y="64" font-size="30" font-weight="500" letter-spacing="-.4">${esc(cfg.displayName || D.name)}</text>

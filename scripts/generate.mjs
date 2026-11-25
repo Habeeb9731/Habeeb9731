@@ -221,6 +221,8 @@ function profileCard() {
     <text class="t num" x="${28 + i * colW}" y="286" font-size="34">${esc(v)}</text></g>`).join("");
   const body = `
   ${fibers(W, H, "pf")}
+  <defs><linearGradient id="pscrim" x1="0" y1="0" x2="${W}" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="${CARD}" stop-opacity=".85"/><stop offset=".6" stop-color="${CARD}" stop-opacity=".62"/><stop offset="1" stop-color="${CARD}" stop-opacity=".45"/></linearGradient></defs>
+  <rect width="${W}" height="${H}" fill="url(#pscrim)"/>
   ${avatar}
   <text class="t" x="180" y="64" font-size="30" font-weight="500" letter-spacing="-.4">${esc(cfg.displayName || D.name)}</text>
   <text class="t mut" x="180" y="90" font-size="13">@${esc(D.login)}  ·  ${esc([cfg.location, cfg.website].filter(Boolean).join("  ·  "))}</text>

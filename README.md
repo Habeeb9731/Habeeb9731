@@ -30,10 +30,10 @@ I turn complex systems and datasets into products people can understand and use 
 
 <div align="center">
 
-<a href="https://apex.abdulhabeeb.com/"><img src="assets/repo-apex-f1-analytics.svg" alt="APEX F1 Analytics" width="49%"/></a>
-<a href="https://autonomous-data-analyst.abdulhabeeb.com/"><img src="assets/repo-autonomous-data-analyst.svg" alt="Autonomous Data Analyst" width="49%"/></a>
 <a href="https://github.com/Habeeb9731/german-day-ahead-forecast"><img src="assets/repo-german-day-ahead-forecast.svg" alt="German day-ahead forecast" width="49%"/></a>
 <a href="https://github.com/Habeeb9731/linkstoqr"><img src="assets/repo-linkstoqr.svg" alt="linkstoqr" width="49%"/></a>
+<a href="https://apex.abdulhabeeb.com/"><img src="assets/repo-apex-f1-analytics.svg" alt="APEX F1 Analytics" width="49%"/></a>
+<a href="https://github.com/Habeeb9731/dbtt-widget"><img src="assets/repo-dbtt-widget.svg" alt="dbtt-widget" width="49%"/></a>
 
 </div>
 

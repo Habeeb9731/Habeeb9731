@@ -8,6 +8,7 @@
 - `badge`: text of the pill top-right (set to `""` to hide)
 - `tagline`, `location`, `website`
 - `featured`: repo names shown as cards — if you change these, update the matching `<a>/<img>` lines in README.md
+- `languageMode`: `repos` (count each repo's main language) or `bytes` (GitHub's code-size totals)
 - `descriptionOverrides`: `{ "repo-name": "custom text" }` for repos without a description
 
 Local preview without a token: `node scripts/generate.mjs --data data/snapshot.json`

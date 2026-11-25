@@ -1,18 +1,17 @@
 {
   "login": "Habeeb9731",
   "displayName": "Abdul Habeeb",
-  "tagline": "Data Science & AI M.Sc. @ Saarland University · Full-stack developer · RA at FGVT",
+  "tagline": "M.Sc. Data Science & AI @ Saarland University · building agentic AI & LLM tools",
   "location": "Saarbrücken, DE",
   "website": "abdulhabeeb.com",
   "badge": "OPEN TO WORK",
   "theme": "lime",
   "featured": [
-    "apex-f1-analytics",
-    "autonomous-data-analyst",
     "german-day-ahead-forecast",
-    "linkstoqr"
+    "linkstoqr",
+    "apex-f1-analytics",
+    "dbtt-widget"
   ],
-  "descriptionOverrides": {
-    "autonomous-data-analyst": "AI-assisted analytics workspace with a deterministic profiling engine"
-  }
+  "descriptionOverrides": {},
+  "languageMode": "repos"
 }

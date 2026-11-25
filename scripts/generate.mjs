@@ -44,10 +44,18 @@ async function fetchLive() {
   const u = json.data.user;
   const repos = u.repositories.nodes;
   const own = repos.filter((r) => !r.isFork);
+  // languageMode "repos": count each repo's primary language once; "bytes": GitHub's code-size totals
   const langs = {};
-  for (const r of own) for (const e of r.languages.edges) {
-    langs[e.node.name] ??= { size: 0, color: e.node.color };
-    langs[e.node.name].size += e.size;
+  if (cfg.languageMode === "bytes") {
+    for (const r of own) for (const e of r.languages.edges) {
+      langs[e.node.name] ??= { size: 0, color: e.node.color };
+      langs[e.node.name].size += e.size;
+    }
+  } else {
+    for (const r of own) if (r.primaryLanguage) {
+      langs[r.primaryLanguage.name] ??= { size: 0, color: r.primaryLanguage.color };
+      langs[r.primaryLanguage.name].size += 1;
+    }
   }
   let avatar = null;
   try {

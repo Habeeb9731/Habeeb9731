@@ -169,8 +169,8 @@ function profileCard() {
   const W = 840, H = 318;
   const initials = (cfg.displayName || D.name || D.login).split(/\s+/).map((p) => p[0]).slice(0, 2).join("").toUpperCase();
   const avatar = D.avatar
-    ? `<clipPath id="pav"><circle cx="96" cy="96" r="50"/></clipPath><image href="${D.avatar}" x="46" y="46" width="100" height="100" clip-path="url(#pav)" preserveAspectRatio="xMidYMid slice"/>`
-    : `<circle cx="96" cy="96" r="50" fill="${A}"/><text class="t ink" x="96" y="107" font-size="30" font-weight="700" text-anchor="middle">${esc(initials)}</text>`;
+    ? `<clipPath id="pav"><rect x="28" y="28" width="136" height="136" rx="22"/></clipPath><image href="${D.avatar}" x="28" y="28" width="136" height="136" clip-path="url(#pav)" preserveAspectRatio="xMidYMid slice"/>`
+    : `<rect x="28" y="28" width="136" height="136" rx="22" fill="${A}"/><text class="t ink" x="96" y="108" font-size="34" font-weight="700" text-anchor="middle">${esc(initials)}</text>`;
   // language pills with lime count badges
   const counts = {}; for (const l of langs) counts[l.name] = l.weight;
   let cx = 180;
@@ -189,7 +189,6 @@ function profileCard() {
     <text class="t mut" x="${28 + i * colW}" y="244" font-size="12">${l}</text>
     <text class="t num" x="${28 + i * colW}" y="286" font-size="34">${esc(v)}</text></g>`).join("");
   const body = `
-  <rect x="28" y="28" width="136" height="136" rx="22" fill="${RAISED}"/>
   ${avatar}
   <text class="t" x="180" y="64" font-size="30" font-weight="500" letter-spacing="-.4">${esc(cfg.displayName || D.name)}</text>
   <text class="t mut" x="180" y="90" font-size="13">@${esc(D.login)}  ·  ${esc([cfg.location, cfg.website].filter(Boolean).join("  ·  "))}</text>

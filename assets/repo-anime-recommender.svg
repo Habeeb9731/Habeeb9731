@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="413" height="180" viewBox="0 0 413 180" fill="none" role="img">
 <defs>
-  <pattern id="r3h" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="9" stroke="#fff" stroke-opacity=".028" stroke-width="1"/></pattern>
-  <clipPath id="r3c"><rect width="413" height="180" rx="28"/></clipPath>
+  <pattern id="r1h" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="9" stroke="#fff" stroke-opacity=".028" stroke-width="1"/></pattern>
+  <clipPath id="r1c"><rect width="413" height="180" rx="28"/></clipPath>
 </defs>
 <style>
   .t{font-family:Urbanist,'Plus Jakarta Sans',Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:#f2f2f2}
@@ -15,12 +15,13 @@
   @keyframes rt{from{transform:scaleX(0)}to{transform:scaleX(1)}}
   @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
-<g clip-path="url(#r3c)"><rect width="413" height="180" fill="#1b1b1b"/><rect width="413" height="180" fill="url(#r3h)"/>
-  <text class="t mut" x="28" y="42" font-size="12">#04</text>
-  <text class="t" x="28" y="74" font-size="21" font-weight="500" letter-spacing="-.3">anime-recommender</text>
-  <text class="t mut" x="28" y="102" font-size="12">Hybrid recommender for new titles and new</text><text class="t mut" x="28" y="119" font-size="12">users · +313% NDCG@10 over popularity</text>
+<g clip-path="url(#r1c)"><rect width="413" height="180" fill="#1b1b1b"/><rect width="413" height="180" fill="url(#r1h)"/>
+  <text class="t mut" x="28" y="42" font-size="12">#02</text>
+  <text class="t" x="28" y="74" font-size="21" font-weight="500" letter-spacing="-.3">AnimeRec</text>
+  <text class="t mut" x="28" y="102" font-size="12">Hybrid recommender for new titles and visitors</text><text class="t mut" x="28" y="119" font-size="12">· +63% NDCG@10 vs recent popularity.</text>
   <g transform="translate(28 136)"><rect width="68.28" height="24" rx="12" fill="#3a3a3a"/>
     <circle cx="13" cy="12" r="4" fill="#3572A5"/><text class="t" x="22" y="16" font-size="11">Python</text></g>
+  <g transform="translate(104.28 136)"><rect width="45.2" height="24" rx="12" fill="#c6f432"/><text class="t ink" x="22.6" y="16" font-size="10" font-weight="700" text-anchor="middle">LIVE</text></g>
   
   <circle cx="363" cy="50" r="22" fill="#c6f432"/>
   <path d="M357.5 55.5L368.5 44.5M359.26 44.5H368.5V53.74" stroke="#141414" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>

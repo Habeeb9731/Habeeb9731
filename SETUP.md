@@ -6,11 +6,15 @@
 ## Customising (`skin.config.json`)
 - `theme`: `lime` (default), `mint` or `coral`
 - `badge`: text of the pill top-right (set to `""` to hide)
-- `tagline`, `location`, `website`
-- `featured`: repo names shown as cards — if you change these, update the matching `<a>/<img>` lines in README.md
-- `languageMode`: `repos` (count each repo's main language) or `bytes` (GitHub's code-size totals)
-- `recentRepos`: with `languageMode: repos`, only count this many most-recently-updated repos (remove to count all)
-- `descriptionOverrides`: `{ "repo-name": "custom text" }` for repos without a description
+- `tagline` (wraps to two lines if long), `location`, `website`
+- `focus`: up to four pills under the tagline
+- `highlights`: up to four stats on the profile card, each `{ "label", "value" }` or `{ "label", "source" }` with source `blogPosts`, `publicRepos` or `contributions` (counted live)
+- `blogRepo` / `blogPath`: where blog posts live, one folder per post, for the `blogPosts` count
+- `stack`: rows of `[group, [tools]]` for the Stack card; the first tool is highlighted
+- `featured`: project cards, each `{ "repo", "title", "url", "tag", "description", "language" }` (`language` overrides the main language GitHub reports); cards link to `url` (or the repo)
+- `intro`, `email`, `linkedin`: the text section under the cards
+
+README.md is written by the generator from this file, so edit the config, not the README.
 
 Local preview without a token: `node scripts/generate.mjs --data data/snapshot.json`
 

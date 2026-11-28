@@ -9,6 +9,8 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "assets");
 const cfg = JSON.parse(await readFile(join(ROOT, "skin.config.json"), "utf8"));
+// featured: plain repo names, or { repo, title, url, tag, description }
+const FEATURED = (cfg.featured ?? []).map((f) => (typeof f === "string" ? { repo: f } : f));
 
 const THEMES = {
   lime:  { accent: "#c6f432", grid: ["#262626", "#3a4519", "#62801f", "#97c02b", "#c6f432"] },
@@ -62,7 +64,16 @@ async function fetchLive() {
     const img = await fetch(u.avatarUrl);
     avatar = `data:${img.headers.get("content-type") || "image/png"};base64,${Buffer.from(await img.arrayBuffer()).toString("base64")}`;
   } catch {}
+  // Blog posts: one folder per post in the blog repo (counted live so the number never goes stale)
+  let blogPosts = null;
+  if (cfg.blogRepo) {
+    try {
+      const r = await fetch(`https://api.github.com/repos/${cfg.blogRepo}/contents/${cfg.blogPath || "blog"}`, { headers: { Authorization: `bearer ${token}` } });
+      if (r.ok) blogPosts = (await r.json()).filter((e) => e.type === "dir").length;
+    } catch {}
+  }
   return {
+    blogPosts,
     name: u.name, login: u.login, createdAt: u.createdAt, avatar,
     followers: u.followers.totalCount,
     publicRepos: u.repositories.totalCount,
@@ -224,25 +235,27 @@ function contactPills(x0, y0, maxX, items) {
 function profileCard() {
   const W = 840;
   const contacts = contactPills(180, 80, W - 28, cfg.contacts ?? []);
-  const cb = contacts.bottom, H = cb + 206;
+  const cb = contacts.bottom;
+  const tagLines = wrap(cfg.tagline, 74, 2), extra = (tagLines.length - 1) * 20, H = cb + 206 + extra;
   const initials = (cfg.displayName || D.name || D.login).split(/\s+/).map((p) => p[0]).slice(0, 2).join("").toUpperCase();
   const avatar = D.avatar
     ? `<clipPath id="pav"><rect x="28" y="28" width="136" height="136" rx="22"/></clipPath><image href="${D.avatar}" x="28" y="28" width="136" height="136" clip-path="url(#pav)" preserveAspectRatio="xMidYMid slice"/>`
     : `<rect x="28" y="28" width="136" height="136" rx="22" fill="${A}"/><text class="t ink" x="96" y="108" font-size="34" font-weight="700" text-anchor="middle">${esc(initials)}</text>`;
-  // language pills with lime count badges
-  const counts = {}; for (const l of langs) counts[l.name] = l.weight;
+  // focus pills: what the work is about (a lime dot each, no language percentages)
   let cx = 180;
-  const pills = langs.slice(0, 4).map((l) => {
-    const badge = String(Math.round((l.weight / langTotal) * 100)) + "%";
-    const bw = tw(badge, 9.5) + 16, w = tw(l.name, 11.5) + bw + 32;
-    const g = `<g transform="translate(${cx} ${cb + 46})"><rect width="${w}" height="28" rx="14" fill="#3a3a3a"/>
-      <text class="t" x="13" y="18.5" font-size="11.5" font-weight="500">${esc(l.name)}</text>
-      <rect x="${w - bw - 6}" y="6" width="${bw}" height="16" rx="8" fill="${A}"/>
-      <text class="t ink" x="${w - bw / 2 - 6}" y="17.5" font-size="9.5" font-weight="700" text-anchor="middle">${badge}</text></g>`;
+  const pills = (cfg.focus ?? []).slice(0, 4).map((name) => {
+    const w = tw(name, 11.5) + 36;
+    const g = `<g transform="translate(${cx} ${cb + 46 + extra})"><rect width="${w}" height="28" rx="14" fill="#3a3a3a"/>
+      <circle cx="15" cy="14" r="3.5" fill="${A}"/>
+      <text class="t" x="25" y="18.5" font-size="11.5" font-weight="500">${esc(name)}</text></g>`;
     cx += w + 8; return g;
   }).join("");
-  const stats = [["Contributions", fmt(total)], ["Public repos", fmt(D.publicRepos)], ["Active days", fmt(activeDays)], ["Best streak", `${longest}d`]];
-  const colW = (W - 56) / 4;
+  // highlight stats: fixed values from the config, or live ones (blogPosts, publicRepos)
+  const live = { blogPosts: D.blogPosts, publicRepos: D.publicRepos, contributions: total };
+  const stats = (cfg.highlights ?? [{ label: "Contributions", source: "contributions" }, { label: "Public repos", source: "publicRepos" }])
+    .map((h) => [h.label, h.source ? (live[h.source] == null ? null : fmt(live[h.source])) : h.value])
+    .filter(([, v]) => v != null).slice(0, 4);
+  const colW = (W - 56) / Math.max(stats.length, 1);
   const statSvg = stats.map(([l, v], i) => `<g class="in" style="animation-delay:${0.1 + i * 0.07}s">
     <text class="t mut" x="${28 + i * colW}" y="${H - 74}" font-size="12">${l}</text>
     <text class="t num" x="${28 + i * colW}" y="${H - 32}" font-size="34">${esc(v)}</text></g>`).join("");
@@ -253,7 +266,7 @@ function profileCard() {
   ${avatar}
   <text class="t" x="180" y="64" font-size="30" font-weight="500" letter-spacing="-.4">${esc(cfg.displayName || D.name)}</text>
   ${contacts.svg}
-  <text class="t" x="180" y="${cb + 28}" font-size="13.5" fill="#d6d6d6">${esc(clip(cfg.tagline, 88))}</text>
+  ${tagLines.map((l, i) => `<text class="t" x="180" y="${cb + 28 + i * 20}" font-size="13.5" fill="#d6d6d6">${esc(l)}</text>`).join("")}
   ${pills}
   ${cfg.badge ? checkPill(W - 96 - tw(cfg.badge, 11) - 50, 37, cfg.badge) : ""}
   ${arrowBtn(W - 56, 52)}
@@ -291,35 +304,40 @@ function activityCard() {
   <text class="t num" x="${W - 28}" y="58" font-size="34" text-anchor="end">${fmt(total)}</text>
   <text class="t mut" x="${W - 28}" y="78" font-size="11" text-anchor="end">contributions in the last year</text>
   ${months}${cells}${tip}
-  <text class="t mut" x="28" y="${H - 24}" font-size="11">${activeDays} active days  ·  current streak ${current}d</text>
   <text class="t mut" x="${W - 128}" y="${H - 25}" font-size="10" text-anchor="end">Less</text>${legend}
   <text class="t mut" x="${W - 40}" y="${H - 25}" font-size="10">More</text>`;
   return frame(W, H, body, "a");
 }
 
-function languagesCard() {
+function stackCard() {
   const W = 413, H = 300;
-  const top = topLangs.filter((l) => l.name !== "Other").slice(0, 5);
-  const max = Math.max(...top.map((l) => l.pct));
-  const bars = top.map((l, i) => {
-    const y = 104 + i * 38, w = Math.max(tw(l.name, 11.5) + 26, ((W - 56 - 56) * l.pct) / max);
-    return `<rect class="rt" style="animation-delay:${i * 0.07}s" x="28" y="${y}" width="${w}" height="28" rx="6" fill="${A}" fill-opacity="${1 - i * 0.13}"/>
-    <text class="t ink" x="40" y="${y + 18.5}" font-size="11.5" font-weight="700">${esc(l.name)}</text>
-    <text class="t mut" x="${28 + w + 10}" y="${y + 18.5}" font-size="11.5">${l.pct.toFixed(1)}%</text>`;
-  }).join("");
+  let y = 96, rows = "";
+  (cfg.stack ?? []).forEach(([group, items], gi) => {
+    rows += `<text class="t mut" x="28" y="${y + 17}" font-size="11">${esc(group)}</text>`;
+    let x = 96;
+    for (const [ii, name] of items.entries()) {
+      const w = tw(name, 11) + 22;
+      if (x + w > W - 24) break;
+      const first = gi === 0 && ii === 0;
+      rows += `<g class="in" style="animation-delay:${(gi * 0.06 + ii * 0.03).toFixed(2)}s" transform="translate(${x} ${y})"><rect width="${w}" height="26" rx="13" fill="${first ? A : "#3a3a3a"}"/>
+        <text class="t${first ? " ink" : ""}" x="${w / 2}" y="17.2" font-size="11" font-weight="${first ? 700 : 500}" text-anchor="middle">${esc(name)}</text></g>`;
+      x += w + 6;
+    }
+    y += 46;
+  });
+  const lead = cfg.stack?.[0]?.[1]?.[0] ?? "";
   const body = `
-  <text class="t mut" x="28" y="40" font-size="12">Top language${cfg.recentRepos && cfg.languageMode !== "bytes" ? ` · last ${cfg.recentRepos} repos` : ""}</text>
-  <text class="t num" x="28" y="76" font-size="34">${esc(top[0]?.name ?? "—")}</text>
-  ${arrowBtn(W - 52, 52)}
-  ${bars}`;
-  return frame(W, H, body, "l");
+  <text class="t mut" x="28" y="40" font-size="12">Stack</text>
+  <text class="t num" x="28" y="76" font-size="34">${esc(lead)} first</text>
+  ${rows}`;
+  return frame(W, H, body, "k");
 }
 
 function momentumCard() {
   const W = 413, H = 300;
   const recent = D.days.slice(-7 * 22);
   const wk = []; for (let i = 0; i < recent.length; i += 7) wk.push(recent.slice(i, i + 7).reduce((s, d) => s + d.count, 0));
-  const mx = Math.max(1, ...wk), hi = wk.lastIndexOf(mx);
+  const mx = Math.max(1, ...wk), hi = wk.lastIndexOf(mx), recentTotal = wk.reduce((a, b) => a + b, 0);
   const bw = 6, step = (W - 56) / wk.length, base = 214;
   const bars = wk.map((v, i) => {
     const h = Math.max(8, Math.sqrt(v / mx) * 112), x = 28 + i * step + (step - bw) / 2;
@@ -331,41 +349,68 @@ function momentumCard() {
   <text class="t mut" x="28" y="64" font-size="11">weekly contributions · last ${wk.length} weeks</text>
   ${bars}
   ${tooltip(hx, base - hh - 30, `${mx} / wk`)}
-  <text class="t num" x="28" y="${H - 30}" font-size="40">${fmt(total + D.publicRepos)}</text>
-  <text class="t mut" x="${28 + tw(fmt(total + D.publicRepos), 40) * 0.92 + 10}" y="${H - 30}" font-size="11">total impact</text>
-  <text class="t mut" x="${W - 28}" y="${H - 30}" font-size="11" text-anchor="end">best streak ${longest}d</text>`;
+  <text class="t num" x="28" y="${H - 30}" font-size="40">${fmt(recentTotal)}</text>
+  <text class="t mut" x="${28 + tw(fmt(recentTotal), 40) * 0.92 + 10}" y="${H - 30}" font-size="11">contributions in ${wk.length} weeks</text>`;
   return frame(W, H, body, "s");
 }
 
-function repoCard(name, idx) {
+const LANG_COLORS = { Python: "#3572A5", TypeScript: "#3178c6", JavaScript: "#f1e05a" };
+function repoCard(f, idx) {
+  const name = f.repo;
   const r = D.repos.find((x) => x.name.toLowerCase() === name.toLowerCase()) ?? { name };
   const W = 413, H = 180;
-  const desc = cfg.descriptionOverrides?.[r.name] ?? r.description ?? (r.language ? `A ${r.language} project.` : "");
+  const desc = f.description ?? cfg.descriptionOverrides?.[r.name] ?? r.description ?? (r.language ? `A ${r.language} project.` : "");
   const lines = wrap(desc, 46, 2);
-  const lang = r.language ?? "Repo";
+  const lang = f.language ?? r.language ?? "Repo";
   const lw = tw(lang, 11) + 30;
   const body = `
   <text class="t mut" x="28" y="42" font-size="12">#${String(idx + 1).padStart(2, "0")}</text>
-  <text class="t" x="28" y="74" font-size="21" font-weight="500" letter-spacing="-.3">${esc(clip(r.name, 26))}</text>
+  <text class="t" x="28" y="74" font-size="21" font-weight="500" letter-spacing="-.3">${esc(clip(f.title ?? r.name, 26))}</text>
   ${lines.map((l, i) => `<text class="t mut" x="28" y="${102 + i * 17}" font-size="12">${esc(l)}</text>`).join("")}
   <g transform="translate(28 ${H - 44})"><rect width="${lw}" height="24" rx="12" fill="#3a3a3a"/>
-    <circle cx="13" cy="12" r="4" fill="${r.color || A}"/><text class="t" x="22" y="16" font-size="11">${esc(lang)}</text></g>
-  ${r.stars ? `<text class="t mut" x="${28 + lw + 12}" y="${H - 28}" font-size="11">★ ${fmt(r.stars)}</text>` : ""}
+    <circle cx="13" cy="12" r="4" fill="${(f.language && LANG_COLORS[f.language]) || r.color || A}"/><text class="t" x="22" y="16" font-size="11">${esc(lang)}</text></g>
+  ${f.tag ? `<g transform="translate(${28 + lw + 8} ${H - 44})"><rect width="${tw(f.tag, 10) + 22}" height="24" rx="12" fill="${A}"/><text class="t ink" x="${(tw(f.tag, 10) + 22) / 2}" y="16" font-size="10" font-weight="700" text-anchor="middle">${esc(f.tag)}</text></g>` : ""}
+  ${r.stars ? `<text class="t mut" x="${28 + lw + (f.tag ? tw(f.tag, 10) + 42 : 12)}" y="${H - 28}" font-size="11">★ ${fmt(r.stars)}</text>` : ""}
   ${arrowBtn(W - 50, 50, 22)}`;
   return frame(W, H, body, "r" + idx);
 }
 
 // ---------- write ----------
 await mkdir(OUT, { recursive: true });
-const files = { "profile.svg": profileCard(), "activity.svg": activityCard(), "languages.svg": languagesCard(), "momentum.svg": momentumCard() };
-cfg.featured.forEach((n, i) => (files[`repo-${n}.svg`] = repoCard(n, i)));
+const files = { "profile.svg": profileCard(), "activity.svg": activityCard(), "stack.svg": stackCard(), "momentum.svg": momentumCard() };
+FEATURED.forEach((f, i) => (files[`repo-${f.repo}.svg`] = repoCard(f, i)));
 for (const [n, svg] of Object.entries(files)) await writeFile(join(OUT, n), svg);
 console.log(`wrote ${Object.keys(files).length} cards · ${total} contributions · ${activeDays} active days · streak ${current}/${longest}${D.avatar ? " · avatar embedded" : " · no avatar (initials)"}`);
 
-// bust GitHub's image cache: stamp every card link in README.md with this run's version
-try {
-  const rp = join(ROOT, "README.md");
+// README.md is written from the config too, so the cards, links and text always match.
+// Every card link carries this run's version, which busts GitHub's image cache.
+{
   const v = Date.now().toString(36);
-  const md = await readFile(rp, "utf8");
-  await writeFile(rp, md.replace(/(assets\/[\w.-]+\.svg)(\?v=\w+)?"/g, `$1?v=${v}"`));
-} catch {}
+  const img = (file, alt, width) => `<img src="assets/${file}?v=${v}" alt="${esc(alt)}" width="${width}"/>`;
+  const site = `https://${cfg.website}`;
+  const cards = FEATURED.map((f) => {
+    const href = f.url ?? `https://github.com/${cfg.login}/${f.repo}`;
+    return `<a href="${href}">${img(`repo-${f.repo}.svg`, `${f.title ?? f.repo}: ${f.description ?? ""}`, "49%")}</a>`;
+  });
+  const projects = FEATURED.map((f) => `- **[${f.title ?? f.repo}](${f.url ?? `https://github.com/${cfg.login}/${f.repo}`})**: ${f.description ?? ""} [Code](https://github.com/${cfg.login}/${f.repo})`);
+  const reach = [cfg.email && `[${cfg.email}](mailto:${cfg.email})`, cfg.linkedin && `[LinkedIn](${cfg.linkedin})`, cfg.website && `[${cfg.website}](${site})`].filter(Boolean).join(" · ");
+  const md = `<div align="center">
+
+<a href="${site}">${img("profile.svg", `${cfg.displayName}: ${cfg.tagline}`, "100%")}</a>
+${img("activity.svg", `${fmt(total)} contributions in the last year`, "100%")}
+${img("stack.svg", `Stack: ${(cfg.stack ?? []).map(([g, items]) => `${g}: ${items.join(", ")}`).join("; ")}`, "49%")}
+${img("momentum.svg", "Weekly contributions over the last 22 weeks", "49%")}
+${cards.join("\n")}
+
+</div>
+
+### About
+
+${cfg.intro ?? cfg.tagline}
+
+${projects.join("\n")}
+
+**Reach me:** ${reach}
+`;
+  await writeFile(join(ROOT, "README.md"), md);
+}

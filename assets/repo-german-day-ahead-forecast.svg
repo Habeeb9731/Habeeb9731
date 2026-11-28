@@ -17,10 +17,11 @@
 </style>
 <g clip-path="url(#r0c)"><rect width="413" height="180" fill="#1b1b1b"/><rect width="413" height="180" fill="url(#r0h)"/>
   <text class="t mut" x="28" y="42" font-size="12">#01</text>
-  <text class="t" x="28" y="74" font-size="21" font-weight="500" letter-spacing="-.3">german-day-ahead-forecast</text>
-  <text class="t mut" x="28" y="102" font-size="12">Forecasts German day-ahead electricity prices</text><text class="t mut" x="28" y="119" font-size="12">each morning and publishes an honest track re…</text>
-  <g transform="translate(28 136)"><rect width="93.8" height="24" rx="12" fill="#3a3a3a"/>
-    <circle cx="13" cy="12" r="4" fill="#3178c6"/><text class="t" x="22" y="16" font-size="11">TypeScript</text></g>
+  <text class="t" x="28" y="74" font-size="21" font-weight="500" letter-spacing="-.3">depower</text>
+  <text class="t mut" x="28" y="102" font-size="12">German power prices forecast every morning and</text><text class="t mut" x="28" y="119" font-size="12">scored in public, with an AI assistant.</text>
+  <g transform="translate(28 136)"><rect width="68.28" height="24" rx="12" fill="#3a3a3a"/>
+    <circle cx="13" cy="12" r="4" fill="#3572A5"/><text class="t" x="22" y="16" font-size="11">Python</text></g>
+  <g transform="translate(104.28 136)"><rect width="91.6" height="24" rx="12" fill="#c6f432"/><text class="t ink" x="45.8" y="16" font-size="10" font-weight="700" text-anchor="middle">LIVE · DAILY</text></g>
   
   <circle cx="363" cy="50" r="22" fill="#c6f432"/>
   <path d="M357.5 55.5L368.5 44.5M359.26 44.5H368.5V53.74" stroke="#141414" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>

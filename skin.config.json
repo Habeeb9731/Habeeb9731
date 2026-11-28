@@ -1,22 +1,109 @@
 {
   "login": "Habeeb9731",
   "displayName": "Abdul Habeeb",
-  "tagline": "M.Sc. Data Science & AI @ Saarland University · building agentic AI & LLM tools",
+  "tagline": "Data Science, AI & Full-Stack Developer · I build AI and data products that actually ship.",
   "location": "Saarbrücken, DE",
   "website": "abdulhabeeb.com",
   "badge": "OPEN TO WORK",
   "theme": "lime",
-  "featured": [
-    "german-day-ahead-forecast",
-    "linkstoqr",
-    "apex-f1-analytics",
-    "anime-recommender"
+  "focus": [
+    "Machine learning",
+    "LLM apps",
+    "Data pipelines",
+    "Full-stack"
   ],
-  "descriptionOverrides": {
-    "anime-recommender": "Hybrid recommender for new titles and new users · +313% NDCG@10 over popularity"
-  },
-  "languageMode": "repos",
-  "recentRepos": 18,
+  "highlights": [
+    {
+      "label": "Live products",
+      "value": "5"
+    },
+    {
+      "label": "Recommender lift",
+      "value": "+63%"
+    },
+    {
+      "label": "Blog posts",
+      "source": "blogPosts"
+    },
+    {
+      "label": "Public repos",
+      "source": "publicRepos"
+    }
+  ],
+  "blogRepo": "Habeeb9731/abdul-habeeb-portfolio",
+  "blogPath": "blog",
+  "stack": [
+    [
+      "AI & ML",
+      [
+        "Python",
+        "LightGBM",
+        "Embeddings",
+        "Claude API"
+      ]
+    ],
+    [
+      "Data",
+      [
+        "SQL",
+        "DuckDB",
+        "Polars",
+        "pandas"
+      ]
+    ],
+    [
+      "Web",
+      [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "FastAPI"
+      ]
+    ],
+    [
+      "Ship",
+      [
+        "Docker",
+        "Cloudflare",
+        "Hetzner",
+        "CI"
+      ]
+    ]
+  ],
+  "featured": [
+    {
+      "repo": "german-day-ahead-forecast",
+      "title": "depower",
+      "url": "https://depower.abdulhabeeb.com",
+      "tag": "LIVE · DAILY",
+      "description": "German power prices forecast every morning and scored in public, with an AI assistant.",
+      "language": "Python"
+    },
+    {
+      "repo": "anime-recommender",
+      "title": "AnimeRec",
+      "url": "https://anime.abdulhabeeb.com",
+      "tag": "LIVE",
+      "description": "Hybrid recommender for new titles and visitors · +63% NDCG@10 vs recent popularity."
+    },
+    {
+      "repo": "apex-f1-analytics",
+      "title": "APEX F1 Analytics",
+      "url": "https://apex.abdulhabeeb.com",
+      "tag": "LIVE",
+      "description": "Formula 1 races, telemetry and tyre strategy on OpenF1 data, with an AI race analyst."
+    },
+    {
+      "repo": "autonomous-data-analyst",
+      "title": "Autonomous Data Analyst",
+      "url": "https://autonomous-data-analyst.abdulhabeeb.com",
+      "tag": "LIVE",
+      "description": "Upload a dataset, get a quality report, findings and charts. Deterministic profiling."
+    }
+  ],
+  "intro": "Data Science, AI & Full-Stack Developer in Saarbrücken, Germany, and M.Sc. student in Data Science and AI at Saarland University. I take ideas from raw data to products people use: models, pipelines, and the web apps on top.",
+  "email": "hello@abdulhabeeb.com",
+  "linkedin": "https://www.linkedin.com/in/abdulhabeeb9731/",
   "contacts": [
     {
       "icon": "github",
@@ -33,10 +120,6 @@
     {
       "icon": "linkedin",
       "label": "in/abdulhabeeb9731"
-    },
-    {
-      "icon": "mail",
-      "label": "abdulhabeeb9731@gmail.com"
     },
     {
       "icon": "mail",

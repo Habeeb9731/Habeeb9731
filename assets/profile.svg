@@ -62,7 +62,7 @@
     <text class="t mut" x="224" y="292" font-size="12">Interactions modelled</text>
     <text class="t num" x="224" y="334" font-size="34">23.2M</text></g><g class="in" style="animation-delay:0.24000000000000002s">
     <text class="t mut" x="420" y="292" font-size="12">Blog posts</text>
-    <text class="t num" x="420" y="334" font-size="34">62</text></g><g class="in" style="animation-delay:0.31000000000000005s">
+    <text class="t num" x="420" y="334" font-size="34">63</text></g><g class="in" style="animation-delay:0.31000000000000005s">
     <text class="t mut" x="616" y="292" font-size="12">Public repos</text>
     <text class="t num" x="616" y="334" font-size="34">47</text></g></g>
 </svg>

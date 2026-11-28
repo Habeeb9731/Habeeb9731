@@ -102,8 +102,6 @@
     }
   ],
   "intro": "Data Science, AI & Full-Stack Developer in Saarbrücken, Germany, and M.Sc. student in Data Science and AI at Saarland University. I take ideas from raw data to products people use: models, pipelines, and the web apps on top.",
-  "email": "hello@abdulhabeeb.com",
-  "linkedin": "https://www.linkedin.com/in/abdulhabeeb9731/",
   "contacts": [
     {
       "icon": "github",
@@ -124,6 +122,31 @@
     {
       "icon": "mail",
       "label": "hello@abdulhabeeb.com"
+    }
+  ],
+  "facts": [
+    "M.Sc. Data Science & AI · Saarland University",
+    "Saarbrücken, Germany",
+    "Research Assistant · FGVT, htw saar"
+  ],
+  "links": [
+    {
+      "icon": "mail",
+      "label": "Email",
+      "value": "hello@abdulhabeeb.com",
+      "url": "mailto:hello@abdulhabeeb.com"
+    },
+    {
+      "icon": "linkedin",
+      "label": "LinkedIn",
+      "value": "in/abdulhabeeb9731",
+      "url": "https://www.linkedin.com/in/abdulhabeeb9731/"
+    },
+    {
+      "icon": "globe",
+      "label": "Website",
+      "value": "abdulhabeeb.com",
+      "url": "https://abdulhabeeb.com"
     }
   ]
 }

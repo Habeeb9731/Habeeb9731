@@ -375,10 +375,42 @@ function repoCard(f, idx) {
   return frame(W, H, body, "r" + idx);
 }
 
+function aboutCard() {
+  const W = 840;
+  const lines = wrap(cfg.intro ?? cfg.tagline, 92, 4);
+  const textTop = 98, factY = textTop + lines.length * 24 + 14, H = factY + 26 + 30;
+  let x = 28;
+  const facts = (cfg.facts ?? []).map((f) => {
+    const w = tw(f, 11.5) * 0.95 + 36;
+    const g = `<g transform="translate(${x} ${factY})"><rect width="${w}" height="28" rx="14" fill="#3a3a3a"/>
+      <circle cx="15" cy="14" r="3.5" fill="${A}"/><text class="t" x="25" y="18.5" font-size="11.5" font-weight="500">${esc(f)}</text></g>`;
+    x += w + 8; return g;
+  }).join("");
+  const body = `
+  ${checkPill(28, 26, "About")}
+  ${lines.map((l, i) => `<text class="t" x="28" y="${textTop + i * 24}" font-size="16" fill="#e6e6e6">${esc(l)}</text>`).join("")}
+  ${facts}`;
+  return frame(W, H, body, "ab");
+}
+
+function linkCard(l, i) {
+  // Icon and label on top, the full value underneath, a small arrow in the corner so long values fit.
+  const W = 274, H = 112;
+  const body = `
+  <circle cx="44" cy="40" r="18" fill="#3a3a3a"/>
+  <g transform="translate(34.5 30.5) scale(1.6)" color="${A}" fill="none">${(ICONS[l.icon] ?? "").replace('stroke="#262626"', 'stroke="#3a3a3a"')}</g>
+  <text class="t mut" x="72" y="45" font-size="12">${esc(l.label)}</text>
+  <text class="t" x="26" y="${H - 22}" font-size="15" font-weight="500">${esc(clip(l.value, 28))}</text>
+  ${arrowBtn(W - 38, 40, 15)}`;
+  return frame(W, H, body, "lk" + i);
+}
+
 // ---------- write ----------
 await mkdir(OUT, { recursive: true });
 const files = { "profile.svg": profileCard(), "activity.svg": activityCard(), "stack.svg": stackCard(), "momentum.svg": momentumCard() };
 FEATURED.forEach((f, i) => (files[`repo-${f.repo}.svg`] = repoCard(f, i)));
+files["about.svg"] = aboutCard();
+(cfg.links ?? []).forEach((l, i) => (files[`link-${l.label.toLowerCase()}.svg`] = linkCard(l, i)));
 for (const [n, svg] of Object.entries(files)) await writeFile(join(OUT, n), svg);
 console.log(`wrote ${Object.keys(files).length} cards · ${total} contributions · ${activeDays} active days · streak ${current}/${longest}${D.avatar ? " · avatar embedded" : " · no avatar (initials)"}`);
 
@@ -392,8 +424,7 @@ console.log(`wrote ${Object.keys(files).length} cards · ${total} contributions 
     const href = f.url ?? `https://github.com/${cfg.login}/${f.repo}`;
     return `<a href="${href}">${img(`repo-${f.repo}.svg`, `${f.title ?? f.repo}: ${f.description ?? ""}`, "49%")}</a>`;
   });
-  const projects = FEATURED.map((f) => `- **[${f.title ?? f.repo}](${f.url ?? `https://github.com/${cfg.login}/${f.repo}`})**: ${f.description ?? ""} [Code](https://github.com/${cfg.login}/${f.repo})`);
-  const reach = [cfg.email && `[${cfg.email}](mailto:${cfg.email})`, cfg.linkedin && `[LinkedIn](${cfg.linkedin})`, cfg.website && `[${cfg.website}](${site})`].filter(Boolean).join(" · ");
+  const links = (cfg.links ?? []).map((l) => `<a href="${l.url}">${img(`link-${l.label.toLowerCase()}.svg`, `${l.label}: ${l.value}`, "32.6%")}</a>`);
   const md = `<div align="center">
 
 <a href="${site}">${img("profile.svg", `${cfg.displayName}: ${cfg.tagline}`, "100%")}</a>
@@ -401,16 +432,10 @@ ${img("activity.svg", `${fmt(total)} contributions in the last year`, "100%")}
 ${img("stack.svg", `Stack: ${(cfg.stack ?? []).map(([g, items]) => `${g}: ${items.join(", ")}`).join("; ")}`, "49%")}
 ${img("momentum.svg", "Weekly contributions over the last 22 weeks", "49%")}
 ${cards.join("\n")}
+${img("about.svg", `About: ${cfg.intro ?? ""} ${(cfg.facts ?? []).join(". ")}.`, "100%")}
+${links.join("\n")}
 
 </div>
-
-### About
-
-${cfg.intro ?? cfg.tagline}
-
-${projects.join("\n")}
-
-**Reach me:** ${reach}
 `;
   await writeFile(join(ROOT, "README.md"), md);
 }

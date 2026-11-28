@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="274" height="112" viewBox="0 0 274 112" fill="none" role="img">
+<defs>
+  <pattern id="lk1h" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="9" stroke="#fff" stroke-opacity=".028" stroke-width="1"/></pattern>
+  <clipPath id="lk1c"><rect width="274" height="112" rx="28"/></clipPath>
+</defs>
+<style>
+  .t{font-family:Urbanist,'Plus Jakarta Sans',Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:#f2f2f2}
+  .mut{fill:#8a8a8a}.ink{fill:#141414}
+  .num{font-weight:300;letter-spacing:-1px}
+  .in{animation:in .6s cubic-bezier(.2,.7,.2,1) both}
+  .up{transform-box:fill-box;transform-origin:bottom;animation:up .8s cubic-bezier(.2,.7,.2,1) both}
+  .rt{transform-box:fill-box;transform-origin:left;animation:rt .8s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes in{from{opacity:0}to{opacity:1}}
+  @keyframes up{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+  @keyframes rt{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<g clip-path="url(#lk1c)"><rect width="274" height="112" fill="#1b1b1b"/><rect width="274" height="112" fill="url(#lk1h)"/>
+  <circle cx="44" cy="40" r="18" fill="#3a3a3a"/>
+  <g transform="translate(34.5 30.5) scale(1.6)" color="#c6f432" fill="none"><rect x="1" y="1" width="10" height="10" rx="2" fill="currentColor"/><path d="M3.4 5.1v3.6M3.4 3.4v.1M5.4 8.7V5.1m0 1.6c0-.9.6-1.7 1.5-1.7s1.3.6 1.3 1.6v2.1" stroke="#3a3a3a" stroke-width="1.15" stroke-linecap="round"/></g>
+  <text class="t mut" x="72" y="45" font-size="12">LinkedIn</text>
+  <text class="t" x="26" y="90" font-size="15" font-weight="500">in/abdulhabeeb9731</text>
+  <circle cx="236" cy="40" r="15" fill="#c6f432"/>
+  <path d="M232.25 43.75L239.75 36.25M233.45 36.25H239.75V42.55" stroke="#141414" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+</svg>

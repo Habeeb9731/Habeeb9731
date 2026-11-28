@@ -12,7 +12,7 @@
 - `blogRepo` / `blogPath`: where blog posts live, one folder per post, for the `blogPosts` count
 - `stack`: rows of `[group, [tools]]` for the Stack card; the first tool is highlighted
 - `featured`: project cards, each `{ "repo", "title", "url", "tag", "description", "language" }` (`language` overrides the main language GitHub reports); cards link to `url` (or the repo)
-- `intro`, `email`, `linkedin`: the text section under the cards
+- `intro` and `facts`: the About card; `links`: the contact cards under it, each `{ "icon", "label", "value", "url" }` (icons: mail, linkedin, globe, github, pin)
 
 README.md is written by the generator from this file, so edit the config, not the README.
 

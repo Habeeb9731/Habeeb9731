@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="240" viewBox="0 0 840 240" fill="none" role="img">
+<defs>
+  <pattern id="abh" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="9" stroke="#fff" stroke-opacity=".028" stroke-width="1"/></pattern>
+  <clipPath id="abc"><rect width="840" height="240" rx="28"/></clipPath>
+</defs>
+<style>
+  .t{font-family:Urbanist,'Plus Jakarta Sans',Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:#f2f2f2}
+  .mut{fill:#8a8a8a}.ink{fill:#141414}
+  .num{font-weight:300;letter-spacing:-1px}
+  .in{animation:in .6s cubic-bezier(.2,.7,.2,1) both}
+  .up{transform-box:fill-box;transform-origin:bottom;animation:up .8s cubic-bezier(.2,.7,.2,1) both}
+  .rt{transform-box:fill-box;transform-origin:left;animation:rt .8s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes in{from{opacity:0}to{opacity:1}}
+  @keyframes up{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+  @keyframes rt{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<g clip-path="url(#abc)"><rect width="840" height="240" fill="#1b1b1b"/><rect width="840" height="240" fill="url(#abh)"/>
+  <g transform="translate(28 26)"><rect width="81.9" height="30" rx="15" fill="#f4f4f4"/>
+  <circle cx="15" cy="15" r="10" fill="#141414"/><path d="M10.8 15.2l2.8 2.6 5-5.4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text class="t ink" x="33" y="19.2" font-size="11" font-weight="600">About</text></g>
+  <text class="t" x="28" y="98" font-size="16" fill="#e6e6e6">Data Science, AI &amp; Full-Stack Developer in Saarbrücken, Germany, and M.Sc. student in Data</text><text class="t" x="28" y="122" font-size="16" fill="#e6e6e6">Science and AI at Saarland University. I take ideas from raw data to products people use:</text><text class="t" x="28" y="146" font-size="16" fill="#e6e6e6">models, pipelines, and the web apps on top.</text>
+  <g transform="translate(28 184)"><rect width="321.1425" height="28" rx="14" fill="#3a3a3a"/>
+      <circle cx="15" cy="14" r="3.5" fill="#c6f432"/><text class="t" x="25" y="18.5" font-size="11.5" font-weight="500">M.Sc. Data Science &amp; AI · Saarland University</text></g><g transform="translate(357.1425 184)"><rect width="162.72999999999996" height="28" rx="14" fill="#3a3a3a"/>
+      <circle cx="15" cy="14" r="3.5" fill="#c6f432"/><text class="t" x="25" y="18.5" font-size="11.5" font-weight="500">Saarbrücken, Germany</text></g><g transform="translate(527.8725 184)"><rect width="257.7775" height="28" rx="14" fill="#3a3a3a"/>
+      <circle cx="15" cy="14" r="3.5" fill="#c6f432"/><text class="t" x="25" y="18.5" font-size="11.5" font-weight="500">Research Assistant · FGVT, htw saar</text></g></g>
+</svg>

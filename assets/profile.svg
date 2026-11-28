@@ -59,8 +59,8 @@
   <g class="in" style="animation-delay:0.1s">
     <text class="t mut" x="28" y="292" font-size="12">Live products</text>
     <text class="t num" x="28" y="334" font-size="34">5</text></g><g class="in" style="animation-delay:0.17s">
-    <text class="t mut" x="224" y="292" font-size="12">Recommender lift</text>
-    <text class="t num" x="224" y="334" font-size="34">+63%</text></g><g class="in" style="animation-delay:0.24000000000000002s">
+    <text class="t mut" x="224" y="292" font-size="12">Interactions modelled</text>
+    <text class="t num" x="224" y="334" font-size="34">23.2M</text></g><g class="in" style="animation-delay:0.24000000000000002s">
     <text class="t mut" x="420" y="292" font-size="12">Blog posts</text>
     <text class="t num" x="420" y="334" font-size="34">62</text></g><g class="in" style="animation-delay:0.31000000000000005s">
     <text class="t mut" x="616" y="292" font-size="12">Public repos</text>
